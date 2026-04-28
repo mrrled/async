@@ -27,7 +27,7 @@ async function run() {
 
 run();
 
-function sendRequest(url, callback) {
+function sendRequest(url) {
 
     return new Promise((resolve, reject) => {
         const xhr = new XMLHttpRequest();
