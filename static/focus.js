@@ -1,6 +1,6 @@
 const API = {
     organizationList: "/orgsList",
-    analytics: "/api3/analytics",
+    analytics: "/api3/analitics",
     orgReqs: "/api3/reqBase",
     buhForms: "/api3/buh",
 };
@@ -31,10 +31,12 @@ function sendRequest(url) {
     return fetch(url)
         .then(res => {
             if (!res.ok) {
-                console.error(res.status, res.statusText);
                 throw new Error(`${res.status} ${res.statusText}`)
             }
             return res.json();
+        })
+        .catch(err => {
+            console.error(err);
         });
 }
 
