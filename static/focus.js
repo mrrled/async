@@ -25,17 +25,19 @@ run();
 
 function sendRequest(url, callback) {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", url, true);
 
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE) {
-            if (xhr.status === 200) {
-                callback(JSON.parse(xhr.response));
+    const promise = new Promise(() => {
+        xhr.open("GET", url, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    callback(JSON.parse(xhr.response));
+                }
             }
-        }
-    };
+        };
+    })
 
-    xhr.send();
+    return promise.then(() => xhr.send());
 }
 
 function reqsToMap(requisites) {
