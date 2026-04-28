@@ -1,5 +1,3 @@
-import e from "express";
-
 const API = {
     organizationList: "/orgsList",
     analytics: "/api3/analytics",
@@ -30,12 +28,13 @@ async function run() {
 run();
 
 function sendRequest(url) {
-    return fetch(url).then(res => {
-        if (!res.ok) {
-            console.error(res.status, res.statusCode);
-        }
-        return res.json();
-    });
+    return fetch(url)
+        .then(res => {
+            if (!res.ok) {
+                console.error(res.status, res.statusText);
+            }
+            return res.json();
+        });
 }
 
 function reqsToMap(requisites) {
@@ -86,7 +85,7 @@ function renderOrganization(orgInfo, template, container) {
                 orgInfo.buhForms[orgInfo.buhForms.length - 1].form2[0] &&
                 orgInfo.buhForms[orgInfo.buhForms.length - 1].form2[0]
                     .endValue) ||
-                0
+            0
         );
     } else {
         money.textContent = "—";
