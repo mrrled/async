@@ -32,6 +32,7 @@ function sendRequest(url) {
         .then(res => {
             if (!res.ok) {
                 console.error(res.status, res.statusText);
+                throw new Error(`${res.status} ${res.statusText}`)
             }
             return res.json();
         });
