@@ -30,7 +30,12 @@ async function run() {
 run();
 
 function sendRequest(url) {
-    return fetch(url).then(res=> res.json());
+    return fetch(url).then(res => {
+        if (!res.ok) {
+            console.error(res.status, res.statusCode);
+        }
+        return res.json();
+    });
 }
 
 function reqsToMap(requisites) {
